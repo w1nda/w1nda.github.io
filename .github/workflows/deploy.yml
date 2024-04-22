@@ -38,21 +38,17 @@ jobs:
           pwd
           npm install hexo-cli
 
-      - name: Install github-cli
-        run: |
-          sudo apt install gh
-
       - name: Build artifacts
         run: |
           npx hexo -v
           npx hexo g
-
-      - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v1.0.7
+  
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          # Path of the directory containing the static assets.
+          # Upload entire repository
           path: output/
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
